@@ -28,18 +28,34 @@ It queries global atomic time servers, applies space-grade Kalman filtering, rea
 
 ---
 
-## 🛠️ Build & Run
+## 🚀 Quick 1-Line Automatic Installer
+
+Install **UltraClock** automatically on Linux with a single terminal command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/dotdok132/ultra-clock/master/install.sh | bash
+```
+
+---
+
+## 🛠️ Manual Build & Install
 
 ### Prerequisites
 - C++17 compiler (`g++` or `clang++`)
 - `SDL2` development libraries (`libsdl2-dev` or `sdl2`)
 - `pthread`
 
-### Building
+### Building & Installing
 ```bash
 git clone https://github.com/dotdok132/ultra-clock.git
 cd ultra-clock
+
+# Interactive automatic installer (compiles + creates desktop launcher)
+./install.sh
+
+# Or manual installation
 make
+sudo make install
 ```
 
 ### Running

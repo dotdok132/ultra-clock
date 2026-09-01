@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=UltraClock
+Comment=The Absurdly Over-Engineered 100,000-Digit Atomic Clock
+Exec=ultra_clock
+Icon=preferences-system-time
+Terminal=false
+Categories=Utility;Clock;
+Keywords=clock;time;ntp;atomic;precision;

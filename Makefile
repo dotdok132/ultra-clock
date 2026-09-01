@@ -14,7 +14,20 @@ $(TARGET): $(OBJS)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
-	rm -f $(OBJS) $(TARGET)
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+DESKTOPDIR ?= /usr/share/applications
 
-.PHONY: all clean
+install: $(TARGET)
+	install -d $(DESTDIR)$(BINDIR)
+	install -m 755 $(TARGET) $(DESTDIR)$(BINDIR)/$(TARGET)
+	install -d $(DESTDIR)$(DESKTOPDIR)
+	install -m 644 ultra-clock.desktop $(DESTDIR)$(DESKTOPDIR)/ultra-clock.desktop
+	@echo "UltraClock successfully installed to $(DESTDIR)$(BINDIR)/$(TARGET)"
+
+uninstall:
+	rm -f $(DESTDIR)$(BINDIR)/$(TARGET)
+	rm -f $(DESTDIR)$(DESKTOPDIR)/ultra-clock.desktop
+	@echo "UltraClock successfully uninstalled."
+
+.PHONY: all clean install uninstall
