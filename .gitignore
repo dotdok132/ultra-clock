@@ -1,0 +1,12 @@
+# Build outputs
+*.o
+ultra_clock
+
+# Log files
+timestamp_log.txt
+timestamp_100k_log.txt
+
+# Editor / System
+.vscode/
+.idea/
+.DS_Store
