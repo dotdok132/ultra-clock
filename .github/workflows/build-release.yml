@@ -1,0 +1,36 @@
+name: Build and Release UltraClock
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential libsdl2-dev pkg-config
+
+      - name: Build Binary
+        run: |
+          make clean
+          make -j$(nproc)
+
+      - name: Package Linux Artifact
+        run: |
+          tar -czvf ultra-clock-linux-x86_64.tar.gz ultra_clock install.sh ultra-clock.desktop README.md
+
+      - name: Create Release Artifacts
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ultra-clock-linux-x86_64.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
