@@ -33,7 +33,7 @@ It queries global atomic time servers, applies space-grade Kalman filtering, rea
 Install **UltraClock** automatically on Linux with a single terminal command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dotdok132/ultra-clock/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dotdok132/ultra-clock/main/install.sh | bash
 ```
 
 ---
