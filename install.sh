@@ -37,17 +37,33 @@ fi
 if [ ${#missing_pkgs[@]} -ne 0 ]; then
     echo -e "${RED}[!] Missing required dependencies:${NC} ${missing_pkgs[*]}"
     echo -e "${YELLOW}[i] Please install SDL2 development libraries and C++ build tools for your Linux distribution:${NC}"
-    echo "    Ubuntu/Debian: sudo apt update && sudo apt install build-essential libsdl2-dev pkg-config"
-    echo "    Arch Linux:    sudo pacman -S base-devel sdl2 pkgconf"
-    echo "    Fedora:        sudo dnf groupinstall \"C Development Tools and Libraries\" && sudo dnf install SDL2-devel"
+    echo "    Ubuntu/Debian/Pop!_OS: sudo apt update && sudo apt install build-essential libsdl2-dev pkg-config git"
+    echo "    Arch Linux:            sudo pacman -S base-devel sdl2 pkgconf git"
+    echo "    Fedora:                sudo dnf groupinstall \"C Development Tools and Libraries\" && sudo dnf install SDL2-devel git"
     exit 1
 fi
 
 echo -e "${GREEN}[✓] Dependencies satisfied!${NC}\n"
 
+# If running via curl | bash, clone repo to a temporary workspace
+TMP_DIR=""
+if [ ! -f "Makefile" ]; then
+    echo -e "${CYAN}[+] Downloading UltraClock repository...${NC}"
+    if ! command -v git &> /dev/null; then
+        echo -e "${RED}[!] git is required to download UltraClock.${NC}"
+        exit 1
+    fi
+    TMP_DIR=$(mktemp -d)
+    trap 'rm -rf "$TMP_DIR"' EXIT
+    git clone --depth 1 https://github.com/dotdok132/ultra-clock.git "$TMP_DIR"
+    cd "$TMP_DIR"
+fi
+
 # Build project
 echo -e "${CYAN}[+] Compiling UltraClock...${NC}"
-make clean
+if [ -f "ultra_clock" ]; then
+    make clean
+fi
 make -j$(nproc 2>/dev/null || echo 2)
 
 echo -e "\n${CYAN}[+] Installing UltraClock system-wide...${NC}"
