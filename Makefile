@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -Isrc $(shell pkg-config --cflags sdl2)
+CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -Isrc -Isrc/stb $(shell pkg-config --cflags sdl2)
 LDFLAGS = $(shell pkg-config --libs sdl2) -lpthread
 
 SRCS = src/main.cpp src/ntp_client.cpp src/precise_clock.cpp src/renderer.cpp
