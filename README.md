@@ -24,7 +24,16 @@ It queries global atomic time servers, applies space-grade Kalman filtering, rea
 - ⚡ **Serialized CPU Timestamping (`__rdtscp`)**: Prevents CPU instruction out-of-order execution jitter.
 - 🔬 **Picosecond ($10^{-12}\text{s}$) & Planck Time ($t_P$) Calculation**: Calculates physical time down to Planck units ($5.39 \times 10^{-44}\text{s}$).
 - 💥 **10,000-Digit On-Screen Matrix & 100,000-Digit File Logger**: Generates and writes up to 100,000 sub-second decimal places to `timestamp_100k_log.txt`.
-- 🎨 **Pure Minimalist UI**: High-contrast black & white SDL2 renderer with custom `stb_truetype` font baking.
+- 📱 **Mobile & Web PWA Support**: Mobile web app and Android NDK CMake project files for building on Android/iOS devices.
+
+---
+
+## 📱 Mobile / Web Version
+
+Open UltraClock directly on any mobile browser (Android / iOS):
+[https://dotdok132.github.io/ultra-clock/web/](https://dotdok132.github.io/ultra-clock/web/)
+
+Android C++ NDK sources are located under `android/app/src/main/cpp/CMakeLists.txt`.
 
 ---
 
